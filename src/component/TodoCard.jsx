@@ -27,12 +27,19 @@ const TodoCard = ({ item, getTodos }) => {
       data: {...item, isCompleted : !item.isCompleted}
     }
     axios(config).then((result) => {
-      console.log(result)
       getTodos()
     }).catch((err) => {
       console.log(err);
     });
   }
+
+  const handleDelete = () => { 
+    axios.delete(`https://631b6888fae3df4dcffe10be.mockapi.io/todos/${item.id}`).then((result) => {
+      getTodos()
+    }).catch((err) => {
+      console.log(err)
+    });
+   }
 
   return (
     <div className={item.isCompleted ? "flex flex-col justify-between w-72 h-[13.5rem] rounded-xl relative p-1 bg-gradient-to-r from-[#69b2fa] to-[#b3d7f9]":"flex flex-col justify-between w-72 h-[13.5rem] rounded-xl relative p-1 bg-gradient-to-r from-[#de6262] to-[#ad9af9]"}>
@@ -56,7 +63,7 @@ const TodoCard = ({ item, getTodos }) => {
         <button className="w-8 bg-yellow-500 p-1 rounded-full hover:opacity-80">
           <img src={editIcon} alt="edit_icon" />
         </button>
-        <button className="w-8 bg-rose-500 p-1.5 rounded-full hover:opacity-80">
+        <button className="w-8 bg-rose-500 p-1.5 rounded-full hover:opacity-80" onClick={handleDelete}>
           <img src={deleteIcon} alt="delete_icon" />
         </button>
       </div>
