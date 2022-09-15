@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import TodoCard from "./TodoCard";
 
-const TodoList = ({ allTodos }) => {
+const TodoList = ({ allTodos,  getTodos }) => {
   const [todosToDisplay, setTodosToDisplay] = useState([]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const TodoList = ({ allTodos }) => {
       </div>
       <div className="flex flex-row flex-wrap items-center justify-center gap-7 my-5 px-5">
         {todosToDisplay?.map((item) => (
-          <TodoCard key={item.id} {...item} />
+          <TodoCard key={item.id} item={ item } getTodos={getTodos} />
         ))}
       </div>
     </div>

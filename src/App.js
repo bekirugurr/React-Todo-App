@@ -30,7 +30,7 @@ function App() {
       <ToastContainer />
       {!userName && <TakeUserName setUserName={setUserName} />}
       <Header userName={userName} getTodos={getTodos}/>
-      <TodoList allTodos={allTodos}/>
+      <TodoList allTodos={allTodos}  getTodos={getTodos}/>
     </div>
   );
 }
