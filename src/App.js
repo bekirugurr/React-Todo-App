@@ -10,10 +10,17 @@ const URL = "https://631b6888fae3df4dcffe10be.mockapi.io/todos";
 
 function App() {
   const [userName, setUserName] = useState("");
-  const [allTodos, setAllTodos] = useState([])
+  const [allTodos, setAllTodos] = useState([]);
+  const [initialData, setInitialData] = useState({
+    title: "",
+    content: "",
+    priority: 2,
+    label: "",
+    isCompleted: false
+  });
 
   const getTodos = async () => {
-    const {data} = await axios.get(URL);
+    const { data } = await axios.get(URL);
     setAllTodos(data);
   };
 
@@ -29,8 +36,16 @@ function App() {
     <div className="App">
       <ToastContainer />
       {!userName && <TakeUserName setUserName={setUserName} />}
-      <Header userName={userName} getTodos={getTodos}/>
-      <TodoList allTodos={allTodos}  getTodos={getTodos}/>
+      <Header
+        userName={userName}
+        getTodos={getTodos}
+        initialData={initialData}
+      />
+      <TodoList
+        allTodos={allTodos}
+        getTodos={getTodos}
+        setInitialData={setInitialData}
+      />
     </div>
   );
 }
