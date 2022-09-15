@@ -6,25 +6,37 @@ import { toastWarnNotify } from "../helpers/ToastNotify";
 const initilData = {
   title: "",
   content: "",
-  priority: "2",
+  priority: 2,
   label: "",
   isCompleted: false
 };
 
-const Form = () => {
+const Form = ({getTodos}) => {
   const [formData, setFormData] = useState(initilData);
   const URL = "https://631b6888fae3df4dcffe10be.mockapi.io/todos";
 
+  const isLabel = (e) =>{
+    if(e.target.name === 'priority'){
+      return Number(e.target.value)
+    }else{
+      return e.target.value
+    }
+  }
   const handleFormData = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: isLabel(e) });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.title && formData.content.length >= 3 && formData.label) {
-      axios({ method: "post", url: URL, data: formData });
+      axios({ method: "post", url: URL, data: formData }).then((result) => {
+      getTodos();
       setFormData(initilData);
+      }).catch((err) => {
+        console.log(err)
+      });
+      
     } else if (formData.content.length < 3) {
-      toastWarnNotify("Content must at least 3 characters!");
+      toastWarnNotify("Content must be at least 3 characters!");
     }
   };
 
@@ -38,9 +50,10 @@ const Form = () => {
           name="title"
           type="text"
           placeholder="⚡ Enter task title"
-          className="pl-4 pr-2 py-2 rounded border border-1 border-blue-500 w-96  outline-none focus:shadow-md focus:shadow-blue-500"
+          className="pl-4 pr-2 py-1.5 rounded border border-1 border-blue-500 w-[20rem]  outline-none focus:shadow-md focus:shadow-blue-500"
           onChange={handleFormData}
           value={formData.title}
+          maxLength = "25"
           required
         />
         <textarea
@@ -48,33 +61,35 @@ const Form = () => {
           id="content"
           rows="3"
           placeholder="💪 What are you going to do?"
-          className="resize-none pl-4 pr-2 py-2 rounded border border-1 border-blue-500 w-96 outline-none focus:shadow-md focus:shadow-blue-500"
+          className="resize-none pl-4 pr-6 py-1.5 rounded border border-1 border-blue-500 w-[20rem]  outline-none focus:shadow-md focus:shadow-blue-500"
           onChange={handleFormData}
           value={formData.content}
+          maxLength = "90"
           required
         ></textarea>
         <select
           name="priority"
           id="priority"
-          className="pl-4 py-2 rounded border border-1 border-blue-500 w-72 outline-none focus:shadow-md focus:shadow-blue-500"
+          className="pl-4 py-1.5 rounded border border-1 border-blue-500 w-[14rem] outline-none focus:shadow-md focus:shadow-blue-500"
           onChange={handleFormData}
           value={formData.priority}
         >
-          <option value="3">😱 High Priority</option>
-          <option value="2">😨 Middle Priority</option>
-          <option value="1">😧 Low Priority</option>
+          <option value="3">😱 Critical Priority</option>
+          <option value="2">😨 Important Priority</option>
+          <option value="1">😧 Normal Priority</option>
         </select>
         <input
           name="label"
           type="text"
           placeholder="🔖 Enter task tag"
-          className="pl-4 py-2 rounded border border-1 border-blue-500 w-72 outline-none focus:shadow-md focus:shadow-blue-500"
+          className="pl-4 py-1.5 rounded border border-1 border-blue-500 w-[14rem] outline-none focus:shadow-md focus:shadow-blue-500"
           onChange={handleFormData}
           value={formData.label}
+          maxLength = "10"
           required
         />
         <button type="submit" className="absolute right-5 bottom-6">
-          <BsFillPlusCircleFill className=" w-20 h-20 text-blue-600 " />
+          <BsFillPlusCircleFill className=" w-[5rem]  h-[5rem]  text-blue-600 " />
         </button>
       </form>
     </div>
