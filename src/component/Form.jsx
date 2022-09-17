@@ -18,8 +18,6 @@ const Form = ({ getTodos, initialData }) => {
   setFormData(initialData)
   }, [initialData])
   
-  console.log("initialData", initialData);
-  console.log("formData", formData);
 
   const isLabel = (e) => {
     if (e.target.name === "priority") {
@@ -115,7 +113,7 @@ const Form = ({ getTodos, initialData }) => {
           required
         />
         <button type="submit" className="absolute right-5 bottom-6">
-          <BsFillPlusCircleFill className=" w-[5rem]  h-[5rem]  text-blue-600 " />
+          <BsFillPlusCircleFill className=" w-[5rem]  h-[5rem]  text-blue-600 hover:opacity-90" />
         </button>
       </form>
     </div>

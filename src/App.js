@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import TakeUserName from "./component/TakeUserName";
 import TodoList from "./component/TodoList";
 import axios from "axios";
+import Loading from "./component/Loading";
 
 const URL = "https://631b6888fae3df4dcffe10be.mockapi.io/todos";
 
@@ -19,9 +20,12 @@ function App() {
     isCompleted: false
   });
 
-  const getTodos = async () => {
-    const { data } = await axios.get(URL);
-    setAllTodos(data);
+  const getTodos = () => {
+    axios.get(URL).then(({data}) => {
+      setAllTodos(data)
+    }).catch((err) => {
+      console.log(err);
+    })
   };
 
   useEffect(() => {
@@ -41,11 +45,15 @@ function App() {
         getTodos={getTodos}
         initialData={initialData}
       />
-      <TodoList
+      {allTodos.length == 0 ? (
+      <Loading />
+      ) : (
+        <TodoList
         allTodos={allTodos}
         getTodos={getTodos}
         setInitialData={setInitialData}
       />
+      )}
     </div>
   );
 }

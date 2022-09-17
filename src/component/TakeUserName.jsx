@@ -2,12 +2,12 @@ import { useState } from "react";
 import { toastSuccesNotify } from "../helpers/ToastNotify";
 
 
-const TakeUserName = ({ infos, setInfos }) => {
+const TakeUserName = ({ setUserName }) => {
   const [formData, setFormData] = useState("");
   
   const handleSubmit = (e) => { 
     e.preventDefault()
-    setInfos({...infos, userName: formData});
+    setUserName(formData);
     localStorage.setItem("User Name For Todo App", JSON.stringify(formData))
     toastSuccesNotify(`Welcome ${formData}`)
     setFormData("")

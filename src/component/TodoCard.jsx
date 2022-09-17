@@ -10,6 +10,8 @@ const TodoCard = ({ item, getTodos, setInitialData }) => {
   const [isDisplay, setIsDisplay] = useState(true);
   let priorityToDisplay;
   let priorityColor;
+
+  //! Since mockapi does not a field for combo box, for priority select box number field and modulus operator were used in below
   if (item.priority % 3 === 0) {
     priorityToDisplay = "Critical";
     priorityColor = "#F43F5E";
@@ -64,7 +66,7 @@ const TodoCard = ({ item, getTodos, setInitialData }) => {
       <h5 className="rounded-t-xl text-white pl-5 py-2.5 text-xl font-semibold">
         {item.title}
       </h5>
-      <p className="h-[7.8rem] w-full pr-12 pl-4 bg-white">{item.content}</p>
+      <p className="h-[7.8rem] w-full pr-12 pl-4 pt-2 bg-white">{item.content}</p>
       <div className="flex py-1.5 pl-3 gap-2 bg-white rounded-b-xl">
         <div
           className="flex items-center text-white text-sm font-semibold py-0.5 px-2 rounded"
