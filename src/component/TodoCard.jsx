@@ -52,7 +52,6 @@ const TodoCard = ({ item, getTodos, setInitialData }) => {
   const handleEdit = () => {
     setInitialData(item);
     setIsDisplay(false);
-    getTodos(); 
   };
 
   return (
