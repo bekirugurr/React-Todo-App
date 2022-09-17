@@ -11,7 +11,7 @@ const Header = ({ userName, getTodos, initialData }) => {
         <div className="flex flex-wrap justify-center text-white mb-2 text-lg">
             <div className="flex relative 1">
               <div className="z-10 pl-3 pr-6">{userName} </div>
-              <img src={brushStroke} className="absolute inset-0  w-full h-full"/>
+              <img src={brushStroke}  alt="brush_stroke" className="absolute inset-0  w-full h-full"/>
             </div>
               <div > is about to achieve something significant 👏</div>
         </div>

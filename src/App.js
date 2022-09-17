@@ -45,7 +45,7 @@ function App() {
         getTodos={getTodos}
         initialData={initialData}
       />
-      {allTodos.length == 0 ? (
+      {allTodos.length === 0 ? (
       <Loading />
       ) : (
         <TodoList
