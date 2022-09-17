@@ -41,8 +41,8 @@ const Form = ({ getTodos, initialData }) => {
       if (formData.id) {
         axios({ method: "put", url: URL + `/${formData.id}`, data: formData })
         .then((result) => {
-          getTodos();
           setFormData(emptyData);
+          getTodos();
         })
         .catch((err) => {
           console.log(err);
@@ -50,8 +50,8 @@ const Form = ({ getTodos, initialData }) => {
       } else {
         axios({ method: "post", url: URL, data: formData })
           .then((result) => {
-            getTodos();
             setFormData(emptyData);
+            getTodos();
           })
           .catch((err) => {
             console.log(err);
