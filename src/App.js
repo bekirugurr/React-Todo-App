@@ -50,6 +50,7 @@ function App() {
       ) : (
         <TodoList
         allTodos={allTodos}
+        setAllTodos={setAllTodos}
         getTodos={getTodos}
         setInitialData={setInitialData}
       />

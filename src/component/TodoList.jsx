@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import TodoCard from "./TodoCard";
-import antAndCicade from '../assets/antandcicade.jpg'
+import antAndCicade from "../assets/antandcicade.jpg";
 
-const TodoList = ({ allTodos,  getTodos, setInitialData }) => {
+const TodoList = ({ allTodos, setAllTodos, getTodos, setInitialData }) => {
   const [todosToDisplay, setTodosToDisplay] = useState([]);
 
   useEffect(() => {
@@ -48,15 +48,28 @@ const TodoList = ({ allTodos,  getTodos, setInitialData }) => {
         </button>
       </div>
       {todosToDisplay.length !== 0 ? (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-7 my-5 px-2 ">
-        {todosToDisplay?.map((item) => (
-          <TodoCard key={item.id} item={ item } getTodos={getTodos} setInitialData={setInitialData} />
-        ))}
-      </div> 
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-7 my-5 px-2 ">
+          {todosToDisplay?.map((item) => (
+            <TodoCard
+              key={item.id}
+              item={item}
+              getTodos={getTodos}
+              setAllTodos={setAllTodos}
+              allTodos={allTodos}
+              setInitialData={setInitialData}
+            />
+          ))}
+        </div>
       ) : (
         <div className="flex flex-col items-center justify-center gap-5 mb-24">
-        <p className="text-2xl font-semibold  mt-5 text-rose-600 ">You did not add a todo to this tab ...</p>
-        <img src={antAndCicade} alt="ant_and_cicade" className='rounded-3xl w-48 outline outline-2  outline-green-700'/>
+          <p className="text-2xl font-semibold  mt-5 text-rose-600 ">
+            You did not add a todo to this tab ...
+          </p>
+          <img
+            src={antAndCicade}
+            alt="ant_and_cicade"
+            className="rounded-3xl w-48 outline outline-2  outline-green-700"
+          />
         </div>
       )}
     </div>

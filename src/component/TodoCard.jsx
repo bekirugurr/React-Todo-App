@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaTags } from "react-icons/fa";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
 import tickIcon from "../assets/tick_icon.png";
@@ -6,8 +5,7 @@ import editIcon from "../assets/edit_icon.png";
 import deleteIcon from "../assets/trash_icon.png";
 import axios from "axios";
 
-const TodoCard = ({ item, getTodos, setInitialData }) => {
-  const [isDisplay, setIsDisplay] = useState(true);
+const TodoCard = ({ item, getTodos, setInitialData, allTodos, setAllTodos }) => {
   let priorityToDisplay;
   let priorityColor;
 
@@ -51,7 +49,8 @@ const TodoCard = ({ item, getTodos, setInitialData }) => {
 
   const handleEdit = () => {
     setInitialData(item);
-    setIsDisplay(false);
+    let todos = allTodos.filter((todo) => todo.id !== item.id);
+    setAllTodos(todos);
   };
 
   return (
@@ -61,7 +60,6 @@ const TodoCard = ({ item, getTodos, setInitialData }) => {
           ? "flex flex-col justify-between w-72 h-[13.5rem] rounded-xl relative p-1 bg-gradient-to-r from-[#69b2fa] to-[#b3d7f9]"
           : "flex flex-col justify-between w-72 h-[13.5rem] rounded-xl relative p-1 bg-gradient-to-r from-[#de6262] to-[#ad9af9]"
       }
-      style={{ display: isDisplay ? "block" : "none" }}
     >
       <h5 className="rounded-t-xl text-white pl-5 py-2.5 text-xl font-semibold">
         {item.title}
